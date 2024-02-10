@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo-Time</title>
+        <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+    <div class = "container">
+        <!--Static visible header-->
+        <div id=title>
+            <h1 class=header__title>Bingo Party!</h1>
+        </div>
+        <div class="main-controls">
+            <button class="options-btn" id="start-main" onclick="ShowUserInput()">Start</button>
+            <div id="user-input">
+                <label class="form" label for="player1-name">Player one:</label>
+                <input class="text"  id="player1-name" placeholder="PLAYER 1 NAME">
+                <label class="form" label for="player2-name">Player two:</label>
+                <input class="text" id="player2-name" placeholder="PLAYER 2 NAME">
+                <label class="form" label for="player3-name">Player three:</label>
+                <input class="text" id="player3-name" placeholder="PLAYER 3 NAME">
+                <label class="form" label for="player4-name">Player four:</label>
+                <input class="text" id="player4-name" placeholder="PLAYER 4 NAME">
+                <button class="options-btn" button onclick="logUsers()">Continue</button>
+                <div id="board-size">
+                    <button class="size-options" button onclick="show3x3()">3x3</button>
+                    <button class="size-options" button onclick="show4x4()">4x4</button>
+                    <button class="size-options" button onclick="show5x5()">5x5</button>
+                    </div>
+            </div>
+            <div id="game-controls">
+                <div class="bingo-boards">
+                    <div id="bingo-board">
+                    </div>
+                    
+    
+                </div>
+                <div class="board-buttons">
+                    <div id="See-player-controllers">
+                        <button class="funct-btns" id="Player1-card" onclick="showPlayer1()">Player 1 card</button>
+                        <button class="funct-btns" id="Player2-card" onclick="showPlayer2()">Player 2 card</button>
+                        <button class="funct-btns" id="Player-card" onclick="showPlayer3()">Player 3 card</button>
+                        <button class="funct-btns" id="Player4-card" onclick="showPlayer4()">Player 4 card</button>
+                    </div>
+                    <div id="functional-controllers">
+                        <text class="important-info" id="rounds">Round number: </text>
+                        <text class="important-info" id="gameRound">- </text>
+                        <button class="funct-btns" id="drawBall" onclick="drawBall()">Draw ball</button>
+                        <text class="important-info" id="ball">Ball number: </text>
+                        <text class="important-info" id="ballDrawn">- </text>
+                        <button class="funct-btns" id="leaderboard" onclick="showLeaderBoard()">Leaderboard</button>
+                        <div id="leaderBox">
+
+                        </div>
+                    </div>
+                </div>
+            
+            
+        </div>
+        
+        </div>
+    </div>
+<script src="main.js"></script>
+</body>
+</html>

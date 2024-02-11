@@ -1,9 +1,12 @@
 function endGame() { 
+    
     document.getElementById('player1Card').innerHTML = '';
     document.getElementById('player2Card').innerHTML = '';
     document.getElementById('player3Card').innerHTML = '';
     document.getElementById('player4Card').innerHTML = '';
     const button = document.getElementById('start-main');
+    //const buttonlead = document.getElementById('leaderBox');
+    //buttonlead.display="block";
     button.style.display= "block";
     count = 0;
     let disp = document.getElementById('ballDrawn');
@@ -91,13 +94,12 @@ function displayPlayerDetails() {
   
       container.innerHTML = html;
     } else {
-      container.innerHTML = 'No player details found.'+ localStorage.getItem('playerDetails');
+      container .innerHTML = 'No player details found.'+ localStorage.getItem('playerDetails');
     }
     container.style.fontWeight = 'bold';
-    container.style.fontcolor = #fff;
   }
 function showLeaderBoard(){
-   
+    displayPlayerDetails();
     var y = document.getElementById("leaderBox");
     if (y.style.display=='none') {
         y.style.display='block';
@@ -112,7 +114,7 @@ function showLeaderBoard(){
     }else{
         x.style.display = 'none';
     }
-    displayPlayerDetails();
+    
 
 }
 
@@ -138,10 +140,14 @@ function hideMenu(){
 }
 
 function showBoardGame() {
+   
     var x = document.getElementById("game-controls");
     x.style.display = 'block';
     showLeaderBoard();
     createBingoCard(COLS, ROWS);
+    displayPlayerDetails();
+    var y = document.getElementById("leaderBox");
+    y.style.display='block';
 
     player1Card = createBingoCard(COLS, ROWS);
     player2Card = createBingoCard(COLS, ROWS);
@@ -199,7 +205,7 @@ function showPlayer4(){
 
 
 function roundCounter() {
-    if(count==25 ){
+    if(count==25){
         alert(count); 
         count=0;
 
@@ -228,6 +234,12 @@ function drawBall() {
         alert('Maximun rounds! Its over.');
         
         endGame();
+        
+      }
+      if (count==25) {
+        displayPlayerDetails();
+    var y = document.getElementById("leaderBox");
+    y.style.display='block';
         
       }
       markNumber(player1Card, number);

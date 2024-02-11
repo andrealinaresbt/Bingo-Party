@@ -13,8 +13,10 @@
             <h1 class=header__title>Bingo Party!</h1>
         </div>
         <div class="main-controls">
+            <!--Start and reset buttons, the main things the page needs to run-->
             <button class="options-btn" id="start-main" onclick="ShowUserInput()">Start</button>
             <button class="options-btn" id="reset-main" onclick="endGame()">Reset</button>
+            <!--Player name inputs- with labels-->
             <div id="user-input">
                 <label class="form" label for="player1-name">Player one:</label>
                 <input class="text"  id="player1-name" placeholder="PLAYER 1 NAME">
@@ -27,6 +29,7 @@
                 <label class="form" label for="player4-name">Player four:</label>
                 <input class="text" id="player4-name" placeholder="PLAYER 4 NAME">
                 <button class="options-btn" button onclick="logUsers()">Continue</button>
+                <!--Costumizable board size pick button-->
                 <div id="board-size">
                     <button class="size-options" button onclick="show3x3()">3x3</button>
                     <button class="size-options" button onclick="show4x4()">4x4</button>
@@ -34,11 +37,12 @@
                     </div>
             </div>
             <div id="game-controls">
+                <!--Bingo card and controls-->
                 <div class="bingo-container"> 
                     <div id="winDisplay"></div>
                     <button class="lead-btns" id="leaderboard" onclick="showLeaderBoard()">Leaderboard</button>
                     
-                    
+                    <!--LeaderBox-->
                     <div id="leaderBox">
                         <text class="leaderbox-info" id="lead"> LEADERBOARD! </text>
                         
@@ -47,7 +51,8 @@
                     </div>
                     <text class="important-info" id="rounds">You can press the buttons of players to show all the options or remove the one you click on, you can also see them again by clicking on it again. If you click on the leaderboard the leaderboard will display.</text>
                 <div class="player-cards"> 
-                    
+
+                    <!--Player cards that will be set with the css and js-->
                     <div class="player-card" id="player1Card"> 
                     </div> 
                     <div class="player-card" id="player2Card"> 
@@ -61,12 +66,14 @@
                 </div>
     
                 <div class="board-buttons">
+                    <!--Player buttons to show or hide their cards-->
                     <div id="See-player-controllers">
                         <button class="play-btns" id="Player1-card" onclick="showPlayer1()">Player 1 card</button>
                         <button class="play-btns" id="Player2-card" onclick="showPlayer2()">Player 2 card</button>
                         <button class="play-btns" id="Player-card" onclick="showPlayer3()">Player 3 card</button>
                         <button class="play-btns" id="Player4-card" onclick="showPlayer4()">Player 4 card</button>
                     </div>
+                    <!--Functions like the round number and to draw a ball-->
                     <div id="functional-controllers">
                         <text class="important-info" id="rounds">Round number: </text>
                         <text class="important-info" id="gameRound">- </text>

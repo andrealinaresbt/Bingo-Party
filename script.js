@@ -1,5 +1,5 @@
-function endGame() { 
-    
+//Ends game once called, returns to main page or user input page.
+function endGame() {  
     document.getElementById('player1Card').innerHTML = '';
     document.getElementById('player2Card').innerHTML = '';
     document.getElementById('player3Card').innerHTML = '';
@@ -10,8 +10,6 @@ function endGame() {
     points2=0;
     points3=0;
     points4=0;
-    //const buttonlead = document.getElementById('leaderBox');
-    //buttonlead.display="block";
     button.style.display= "block";
     count = 0;
     let disp = document.getElementById('ballDrawn');
@@ -25,6 +23,7 @@ function endGame() {
 
 }
 
+//Shows or hides the boxes for the players input
 function ShowUserInput(){
     var z = document.getElementById("board-size");
     z.style.display = 'none';
@@ -39,7 +38,7 @@ function ShowUserInput(){
 }
 
 
-  
+//Shows or hides the board sizes after completing boxes of input 
 function logUsers() {
     var x = document.getElementById("leaderBox");
     if (x.style.display=='none') {
@@ -56,19 +55,20 @@ function logUsers() {
     
 }
 
+//Stores the players information in the localStorage
 function storePlayerDetails(playerName, playerPoints, playerWins) {
     // Get existing player details from local storage
     const existingPlayerDetails = JSON.parse(localStorage.getItem('playerDetails')) || [];
   
-    // Check if player already exists in player details
+    // Check if player already exists
     const existingPlayerIndex = existingPlayerDetails.findIndex(player => player.name === playerName);
   
     if (existingPlayerIndex > -1) {
-      // Player already exists, update their points
+      //Player already exists, update their points
       existingPlayerDetails[existingPlayerIndex].points = playerPoints;
       existingPlayerDetails[existingPlayerIndex].wins = playerWins;
     } else {
-      // Player does not exist, add new player details
+      // Player does not exist, add new player
       existingPlayerDetails.push({
         name: playerName,
         points: playerPoints,
@@ -76,10 +76,12 @@ function storePlayerDetails(playerName, playerPoints, playerWins) {
       });
     }
   
-    // Update local storage with updated player details
+    //Updates local storage
     localStorage.setItem('playerDetails', JSON.stringify(existingPlayerDetails));
   }
 
+
+//Shows the localStorage information in a div
 function displayPlayerDetails() {
     storePlayerDetails(document.getElementById('player1-name').value, points1, wins1);
     storePlayerDetails(document.getElementById('player2-name').value, points2, wins2);
@@ -106,6 +108,8 @@ function displayPlayerDetails() {
     }
     container.style.fontWeight = 'bold';
   }
+
+//Option to show or hide the leaderboard anytime you wish
 function showLeaderBoard(){
     displayPlayerDetails();
     var y = document.getElementById("leaderBox");
@@ -126,18 +130,7 @@ function showLeaderBoard(){
 
 }
 
-
-function logUsers() {
-    var x = document.getElementById("board-size");
-    if (x.style.display=='none') {
-        x.style.display='block';
-    }else{
-        x.style.display = 'none';
-    }
-    
-   
-}
-
+//Shows or hides the main menu
 function hideMenu(){
     var x = document.getElementById("board-size");
     x.style.display='none';
@@ -147,6 +140,7 @@ function hideMenu(){
     button.style.display= "none";
 }
 
+//Shows the actual bingo cards
 function showBoardGame() {
    
     var x = document.getElementById("game-controls");
@@ -177,6 +171,8 @@ function showBoardGame() {
     updatePlayerCardGrid(COLS);
 }
 
+
+//Shows players
 function showPlayer1() {
     var x = document.getElementById("player1Card");
     if (x.style.display == 'none') {
@@ -211,7 +207,7 @@ function showPlayer4(){
     }
 }
 
-
+//Checks rounds
 function roundCounter() {
     if(count==25){
         alert(count); 
@@ -221,26 +217,23 @@ function roundCounter() {
     }
   }
 
-  
+//Actuallly makes the game functional drawing a ball
 function drawBall() {
 
-   // const MAX_NUM = 75;
     let button = document.getElementById('drawBall');
     let disp = document.getElementById('ballDrawn');
     let counter = document.getElementById('gameRound');
     let count = 0;
-
+//Updates round counter everytime the button is clicked and draws a ball
     button.onclick = function () {
       let number = Math.floor(Math.random() * MAX_NUM) + 1;
       disp.innerHTML = number;
       count++;
       counter.innerHTML = count;
       if (count>25) {
-        
         calculateWins();
         count=0;
         alert('Maximun rounds! Its over.');
-        
         endGame();
         
       }
@@ -250,6 +243,7 @@ function drawBall() {
     y.style.display='block';
         
       }
+      //Marks the numbers pulled
       markNumber(player1Card, number);
       markNumber(player2Card, number);
       markNumber(player3Card, number);
@@ -275,9 +269,10 @@ function drawBall() {
       storePlayerDetails(document.getElementById('player3-name').value, points3, wins3);
       storePlayerDetails(document.getElementById('player4-name').value, points4, wins4);
 
-
+      //Checks for full house
       if (checkFullHouse(player1Card,points1)) { 
         wins1+=1;
+        storePlayerDetails(document.getElementById('player1-name').value, points1, wins1);
         calculateWins();
         endGame();
         
@@ -305,6 +300,7 @@ function drawBall() {
 }
     }
 
+    //Creates bingo card from columns and rows
 
  function createBingoCard(COLS,ROWS) { 
     const card = []; 
@@ -327,6 +323,7 @@ function drawBall() {
     return card; 
 } 
   
+//Displays the bingo cards
 function displayBingoCard(card, ROWS, COLS, containerId) {
     const container = document.getElementById(containerId);
     container.innerHTML = '';
@@ -342,7 +339,8 @@ function displayBingoCard(card, ROWS, COLS, containerId) {
       }
     }
   }
-  
+
+//Checks if the number pulled is in the board and marks it with an X
   function markNumber(card, number) { 
     for (let i = 0; i < ROWS; i++) { 
         for (let j = 0; j < COLS; j++) { 
@@ -355,7 +353,7 @@ function displayBingoCard(card, ROWS, COLS, containerId) {
     return false; 
 }
  
-  
+ //Checks for bingo in rows or cols 
 function checkRowAndCol(card) {
     for (let i = 0; i < ROWS; i++) { 
         let rowFilled = true; 
@@ -374,6 +372,8 @@ function checkRowAndCol(card) {
     } 
     
 }
+
+//Checks for full house
 function checkFullHouse(card) {
         const ROWS = card.length;
         const COLS = card[0].length;
@@ -388,12 +388,10 @@ function checkFullHouse(card) {
           return card.every(isRowFull);
         }
       
-        // Check if all cells in a column are marked
         function isColumnFull(columnIndex) {
           return card.every((row) => row[columnIndex] === 'X');
         }
       
-        // Check if all columns have at least one marked cell
         function areAllColumnsFull() {
           return card[0].every((cell, columnIndex) => isColumnFull(columnIndex));
         }
@@ -402,7 +400,7 @@ function checkFullHouse(card) {
       }
       
 
-
+//Checks bingo diagonal
 function checkDiag(card) {
     let rowFilled = true; 
     let columnFilled = true; 
@@ -422,6 +420,7 @@ function checkDiag(card) {
     
 }
 
+//Calculates points
 function checkWinPoints(card, points) { 
     // Check rows and columns for a Bingo pattern 
     if (checkRowAndCol(card)) {
@@ -441,6 +440,7 @@ function checkWinPoints(card, points) {
     return points;
 }
 
+//Checks if they have bingo 
 function checkWinVoF(card, points) { 
     // Check rows and columns for a Bingo pattern 
     if (checkRowAndCol(card)) {
@@ -460,6 +460,7 @@ function checkWinVoF(card, points) {
     return false;
 }
 
+//Calculates the winner comparing points in a round
 function calculateWins() {
     if (points1 > points2 && points1 > points3 && points1 > points4) {
         wins1 = wins1 + 1;
@@ -484,7 +485,7 @@ function calculateWins() {
     }
 }
     
-
+//Shows the different bingo cards based on size option
 function show3x3(){
     hideMenu();
     COLS =3;

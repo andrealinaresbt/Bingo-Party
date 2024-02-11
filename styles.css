@@ -84,8 +84,8 @@ body{
     
 }
 .size-options{
-    width: 6%;
-    padding: 5px;
+    width: 8%;
+    padding: 7px;
     border-radius: 8px;
     background-color: #f46282;
     color: #fff;
@@ -202,7 +202,3 @@ body{
     font-weight: bold;
 
 }
-
-.leaderBox {
-    font-weight: bold;
-  }

@@ -5,6 +5,11 @@ function endGame() {
     document.getElementById('player3Card').innerHTML = '';
     document.getElementById('player4Card').innerHTML = '';
     const button = document.getElementById('start-main');
+    alert("Going back to menu");
+    points1=0;
+    points2=0;
+    points3=0;
+    points4=0;
     //const buttonlead = document.getElementById('leaderBox');
     //buttonlead.display="block";
     button.style.display= "block";
@@ -13,7 +18,10 @@ function endGame() {
     let counter = document.getElementById('gameRound');
     disp.innerHTML ='-';
     counter.innerHTML='-';
+    var x = document.getElementById("user-input");
+    x.style.display ='block';
     ShowUserInput();
+    
 
 }
 
@@ -499,7 +507,7 @@ function show5x5(){
     showBoardGame();
 }
 
-
+let html ='';
 let ROWS = 5; 
 let points1=0;
 let points2=0;

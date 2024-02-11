@@ -34,6 +34,13 @@
             <div id="game-controls">
                 <div class="bingo-container"> 
                     <div id="winDisplay"></div>
+                    <button class="funct-btns" id="leaderboard" onclick="showLeaderBoard()">Leaderboard</button>
+                    <div id="leaderBox">
+                        
+                        
+                        <text class="leaderbox-info" id="lead"> </text>
+
+                    </div>
                     <text class="important-info" id="rounds">You can press the buttons of players to show all the options or remove the one you click on, you can also see them again by clicking on it again</text>
                 <div class="player-cards"> 
                     
@@ -62,11 +69,7 @@
                         <button class="funct-btns" id="drawBall" onclick="drawBall()">Draw ball</button>
                         <text class="important-info" id="ball">Ball number: </text>
                         <text class="important-info" id="ballDrawn">- </text>
-                        <button class="funct-btns" id="leaderboard" onclick="showLeaderBoard()">Leaderboard</button>
-                        <div id="leaderBox">
-                            <text class="leaderbox-info" id="lead"> </text>
-
-                        </div>
+                        
                     </div>
                 </div>
             

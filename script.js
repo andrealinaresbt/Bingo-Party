@@ -5,7 +5,13 @@ function endGame() {
     document.getElementById('player4Card').innerHTML = '';
     const button = document.getElementById('start-main');
     button.style.display= "block";
+    count = 0;
+    let disp = document.getElementById('ballDrawn');
+    let counter = document.getElementById('gameRound');
+    disp.innerHTML ='-';
+    counter.innerHTML='-';
     ShowUserInput();
+
 }
 
 function ShowUserInput(){
@@ -21,16 +27,7 @@ function ShowUserInput(){
         y.style.display = 'none';
 }
 
-function storePlayerPoints(player) {
-    // Retrieve the player's name and points from the player object
-    let playerName = player.name;
-    let playerPoints = player.points;
-    let playerWins = player.wins;
-  
-    // Store the player's name and points in some way (e.g., in an array, an object, or perform any desired operations)
-    // Example: Storing the player in an array
-    players.push({ name: playerName, points: playerPoints, wins: playerWins });
-  }
+
   
 function logUsers() {
     var x = document.getElementById("leaderBox");
@@ -45,88 +42,58 @@ function logUsers() {
     }else{
         x.style.display = 'none';
     }
-    const player1 = {
-        name: document.getElementById('player1-name').value,
-        points: points1,
-        wins: wins1
-      };
-      storePlayerPoints(player1);
-      
-      const player2 = {
-        name: document.getElementById('player2-name').value,
-        points: points2,
-        wins: wins2,
-      };
-      storePlayerPoints(player2);
-      
-      const player3 = {
-        name: document.getElementById('player3-name').value,
-        points: points3,
-        wins: wins3,
-      };
-      storePlayerPoints(player3);
-      
-      const player4 = {
-        name: document.getElementById('player4-name').value,
-        points: points4,
-        wins: wins4,
-      };
-      storePlayerPoints(player4);
-}
-
-function showLeaderBoard(){
-    var b = document.getElementById("box");
-    if (b.style.display=='none') {
-        b.style.display='block';
-    }else{
-    b.style.display = 'none';
-    }
-    
-    
-    var x = document.getElementById("board-size");
-    if (x.style.display=='none') {
-        x.style.display='block';
-    }else{
-        x.style.display = 'none';
-    }
     
 }
-function storePlayerPoints(playerName, points) {
-    // Get existing players from local storage
-    let players = JSON.parse(localStorage.getItem('players')) || [];
- 
-    // Find the player and update points if already exists, otherwise add new player
-    let existingPlayer = players.find(player => player.name === playerName);
-    if (existingPlayer) {
-      existingPlayer.points = points;
-    } else {
-      players.push({ name: playerName, points: points });
-    }
- 
-    // Store updated players array in local storage
-    localStorage.setItem('players', JSON.stringify(players));
-  }
- 
 
-function displayPlayerPoints() {
-    // Get players from localStorage
-    let players = JSON.parse(localStorage.getItem('players')) || [];
- 
-    // Access the HTML element
-    let playerList = document.getElementById('lead');
- 
-    // Clear any existing content
-    playerList.innerHTML = '';
- 
-    // Loop through the players and update the HTML content
-    players.forEach(player => {
-        let playerHTML = '<li>NAME: ' + player.name + ' POINTS: ' + player.points + ' WINS:' + player.wins + '</li>';
-        playerList.innerHTML += playerHTML;
-      });
-    
-  }
-
+function storePlayerDetails(playerName, playerPoints, playerWins) {
+    // Get existing player details from local storage
+    const existingPlayerDetails = JSON.parse(localStorage.getItem('playerDetails')) || [];
   
+    // Check if player already exists in player details
+    const existingPlayerIndex = existingPlayerDetails.findIndex(player => player.name === playerName);
+  
+    if (existingPlayerIndex > -1) {
+      // Player already exists, update their points
+      existingPlayerDetails[existingPlayerIndex].points = playerPoints;
+      existingPlayerDetails[existingPlayerIndex].wins = playerWins;
+    } else {
+      // Player does not exist, add new player details
+      existingPlayerDetails.push({
+        name: playerName,
+        points: playerPoints,
+        wins: playerWins
+      });
+    }
+  
+    // Update local storage with updated player details
+    localStorage.setItem('playerDetails', JSON.stringify(existingPlayerDetails));
+  }
+
+function displayPlayerDetails() {
+    storePlayerDetails(document.getElementById('player1-name').value, points1, wins1);
+    storePlayerDetails(document.getElementById('player2-name').value, points2, wins2);
+    storePlayerDetails(document.getElementById('player3-name').value, points3, wins3);
+    storePlayerDetails(document.getElementById('player4-name').value, points4, wins4);
+    const playerDetails = JSON.parse(localStorage.getItem('playerDetails'));
+    const container = document.getElementById('leaderBox');
+    let html = '<p>LEADER BOARD</p>';
+  
+    if (playerDetails && playerDetails.length > 0) {
+      
+      playerDetails.forEach(player => {
+        html += '<div>' +
+          'Name: ' + player.name  +
+          '<p>Points: ' + player.points + '</p>' +
+          '<p>Wins: ' + player.wins + '</p>' +
+          '<p>-------------------------</p>' +
+          '</div>';
+      });
+  
+      container.innerHTML = html;
+    } else {
+      container.innerHTML = 'No player details found.'+ localStorage.getItem('playerDetails');
+    }
+  }
 function showLeaderBoard(){
    
     var y = document.getElementById("leaderBox");
@@ -143,8 +110,7 @@ function showLeaderBoard(){
     }else{
         x.style.display = 'none';
     }
-    displayPlayerPoints();
-    
+    displayPlayerDetails();
 
 }
 
@@ -156,18 +122,7 @@ function logUsers() {
     }else{
         x.style.display = 'none';
     }
-    const inputElement = document.getElementById('player1-name');
-    const inputValue = inputElement.value;
-    storePlayerPoints(inputValue,points1);
-    const inputElement2 = document.getElementById('player2-name');
-    const inputValue2 = inputElement.value;
-    storePlayerPoints(inputValue2,points2);
-    const inputElement3 = document.getElementById('player3-name');
-    const inputValue3 = inputElement.value;
-    storePlayerPoints(inputValue3,points3);
-    const inputElement4 = document.getElementById('player4-name');
-    const inputValue4 = inputElement.value;
-    storePlayerPoints(inputValue4,points4);
+    
    
 }
 
@@ -241,9 +196,11 @@ function showPlayer4(){
 }
 
 
-function roundCounter(counter) {
-    if(counter==25){
-        alert("Maximun amount of rounds!"); 
+function roundCounter() {
+    if(count==25 ){
+        alert(count); 
+        count=0;
+
         endGame();
     }
   }
@@ -262,7 +219,15 @@ function drawBall() {
       disp.innerHTML = number;
       count++;
       counter.innerHTML = count;
-      roundCounter(count);
+      if (count>25) {
+        
+        calculateWins();
+        count=0;
+        alert('Maximun rounds! Its over.');
+        
+        endGame();
+        
+      }
       markNumber(player1Card, number);
       markNumber(player2Card, number);
       markNumber(player3Card, number);
@@ -271,75 +236,51 @@ function drawBall() {
       displayBingoCard(player2Card, ROWS,COLS,'player2Card'); 
       displayBingoCard(player3Card, ROWS,COLS,'player3Card'); 
       displayBingoCard(player4Card, ROWS,COLS,'player4Card'); 
-      checkWin(player1Card, points1);
-      const updatedPlayer1 = {
-        name: document.getElementById('player1-name').value,
-        points: points1,
-        wins: wins1,
-      };
-      storePlayerPoints(updatedPlayer1);
-      checkWin(player2Card, points2);
-      const updatedPlayer2 = {
-        name: document.getElementById('player2-name').value,
-        points: points2,
-        wins: wins2,
-      };
-      storePlayerPoints(updatedPlayer2);
-      checkWin(player3Card, points3);
-      const updatedPlayer3 = {
-        name: document.getElementById('player3-name').value,
-        points: points3,
-        wins: wins3,
-      };
-      storePlayerPoints(updatedPlayer3);
-      checkWin(player4Card, points4);
-      const updatedPlayer4 = {
-        name: document.getElementById('player4-name').value,
-        points: points4,
-        wins: wins4,
-      };
-      storePlayerPoints(updatedPlayer1);
+    
+      checkWinVoF(player1Card, points1);
+      checkWinVoF(player2Card, points2);
+      checkWinVoF(player3Card, points3);
+      checkWinVoF(player4Card, points4);
+//Calls checkWin method to change the values of the points
+      points1= checkWinPoints(player1Card, points1);
+      points2= checkWinPoints(player2Card, points2);
+      points3= checkWinPoints(player3Card, points3);
+      points4= checkWinPoints(player4Card, points4);
+
+      //Updates the localStorage
+      storePlayerDetails(document.getElementById('player1-name').value, points1, wins1);
+      storePlayerDetails(document.getElementById('player2-name').value, points2, wins2);
+      storePlayerDetails(document.getElementById('player3-name').value, points3, wins3);
+      storePlayerDetails(document.getElementById('player4-name').value, points4, wins4);
+
+
       if (checkFullHouse(player1Card,points1)) { 
-        document.getElementById('winDisplay').textContent =  'Player 1 has won the game!';
-        checkWin(player4Card, points4);
-      const updatedPlayer1 = {
-        name: document.getElementById('player1-name').value,
-        points: points1,
-        wins: wins1++,
-      };
-      storePlayerPoints(updatedPlayer1);
-        alert("Player 1 has won the game!");  
+        wins1+=1;
+        storePlayerDetails(document.getElementById('player1-name').value, points1, wins1);
+        endGame();
         
     } else if (checkFullHouse(player2Card,points2)) { 
+        wins2+=1;
+        storePlayerDetails(document.getElementById('player2-name').value, points2, wins2);
             document.getElementById('winDisplay').textContent = 'Player 2 has won the game!'; 
             alert("Player 2 has won the game!"); 
-      const updatedPlayer2 = {
-        name: document.getElementById('player2-name').value,
-        points: points2,
-        wins: wins2,
-      };
-      storePlayerPoints(updatedPlayer2);
+            endGame();
+      
            
         }else if (checkFullHouse(player3Card,points3)) { 
+        wins3+=1;
+        storePlayerDetails(document.getElementById('player3-name').value, points3, wins3);
             document.getElementById('winDisplay').textContent = 'Player 3 has won the game!';
             alert("Player 3 has won the game!");  
-      const updatedPlayer3 = {
-        name: document.getElementById('player3-name').value,
-        points: points3,
-        wins: wins3,
-      };
-      storePlayerPoints(updatedPlayer1);
-            
-           
+            endGame();
+      
         }else if (checkFullHouse(player4Card,points4)) { 
+            wins4+=1;
+            storePlayerDetails(document.getElementById('player4-name').value, points4, wins4);
             document.getElementById('winDisplay').textContent = 'Player 4 has won the game!'; 
             alert("Player 4 has won the game!"); 
-      const updatedPlayer4 = {
-        name: document.getElementById('player4-name').value,
-        points: points4,
-        wins: wins4,
-      };
-      storePlayerPoints(updatedPlayer1);
+            endGame();
+
            
         }
 }
@@ -462,27 +403,73 @@ function checkDiag(card) {
     
 }
 
-function checkWin(card, points) { 
+function checkWinPoints(card, points) { 
     // Check rows and columns for a Bingo pattern 
     if (checkRowAndCol(card)) {
-        points++;
-        return false;
+        points++;  
+        return points;
     }
     // Check diagonals for a Bingo pattern 
     if (checkDiag(card)) {
         points = points + 3;
+        return points;
+    }  
+    if (checkFullHouse(card)) {
+        points = points + 5;
+        return points; // Return true if full house is detected
+    }
+
+    return points;
+}
+
+function checkWinVoF(card, points) { 
+    // Check rows and columns for a Bingo pattern 
+    if (checkRowAndCol(card)) {
+        
+        return false;
+    }
+    // Check diagonals for a Bingo pattern 
+    if (checkDiag(card)) {
+       
         return false;
     }  
     if (checkFullHouse(card)) {
+        
         return true; // Return true if full house is detected
     }
 
     return false;
 }
+
+function calculateWins() {
+    if (points1 > points2 && points1 > points3 && points1 > points4) {
+        wins1 = wins1 + 1;
+        storePlayerDetails(document.getElementById('player1-name').value, points1, wins1);
+        return wins1;
+    } else if (points2 > points1 && points2 > points3 && points2 > points4) {
+        wins2 = wins2 + 1;
+        storePlayerDetails(document.getElementById('player2-name').value, points2, wins2);
+        alert('Player 2 won with ' + points2);
+        return wins2;
+    } else if (points3 > points2 && points3 > points1 && points3 > points4) {
+        wins3 = wins3 + 1;
+        storePlayerDetails(document.getElementById('player3-name').value, points3, wins3);
+        alert('Player 3 won with ' + points3);
+        return wins3;
+    } else if (points4 > points2 && points4 > points3 && points4 > points1) {
+        wins4 = wins4 + 1;
+        storePlayerDetails(document.getElementById('player4-name').value, points4, wins4);
+        alert('Player 4 won with ' + points4);
+        return wins4;
+    }
+}
+    
+
 function show3x3(){
     hideMenu();
     COLS =3;
     ROWS =3;
+    count=0;
     showBoardGame();
 
 }
@@ -490,20 +477,24 @@ function show4x4(){
     hideMenu();
     COLS =4;
     ROWS =4;
+    count=0;
     showBoardGame();
 }
 function show5x5(){
     hideMenu();
     COLS =5;
     ROWS =5;
+    count=0;
     showBoardGame();
 }
+
+
 let ROWS = 5; 
 let points1=0;
 let points2=0;
 let points3=0;
 let points4=0;
-let counter = 0;
+let count = 0;
 let wins1=0;
 let wins2=0;
 let wins3=0;
@@ -512,5 +503,4 @@ let COLS = 5;
 const MAX_NUM = 50; 
 ShowUserInput();
 logUsers();
-localStorage.clear();
 

@@ -14,6 +14,7 @@
         </div>
         <div class="main-controls">
             <button class="options-btn" id="start-main" onclick="ShowUserInput()">Start</button>
+            <button class="options-btn" id="reset-main" onclick="endGame()">Reset</button>
             <div id="user-input">
                 <label class="form" label for="player1-name">Player one:</label>
                 <input class="text"  id="player1-name" placeholder="PLAYER 1 NAME">
@@ -32,7 +33,10 @@
             </div>
             <div id="game-controls">
                 <div class="bingo-container"> 
+                    <div id="winDisplay"></div>
+                    <text class="important-info" id="rounds">You can press the buttons of players to show all the options or remove the one you click on, you can also see them again by clicking on it again</text>
                 <div class="player-cards"> 
+                    
                     <div class="player-card" id="player1Card"> 
                     </div> 
                     <div class="player-card" id="player2Card"> 
@@ -60,6 +64,7 @@
                         <text class="important-info" id="ballDrawn">- </text>
                         <button class="funct-btns" id="leaderboard" onclick="showLeaderBoard()">Leaderboard</button>
                         <div id="leaderBox">
+                            <text class="leaderbox-info" id="lead"> </text>
 
                         </div>
                     </div>

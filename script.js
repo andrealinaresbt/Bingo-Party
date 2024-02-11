@@ -464,21 +464,22 @@ function calculateWins() {
     if (points1 > points2 && points1 > points3 && points1 > points4) {
         wins1 = wins1 + 1;
         storePlayerDetails(document.getElementById('player1-name').value, points1, wins1);
+        alert('Player 1 won with ' + points1 + ' points');
         return wins1;
     } else if (points2 > points1 && points2 > points3 && points2 > points4) {
         wins2 = wins2 + 1;
         storePlayerDetails(document.getElementById('player2-name').value, points2, wins2);
-        alert('Player 2 won with ' + points2);
+        alert('Player 2 won with ' + points2 + ' points');
         return wins2;
     } else if (points3 > points2 && points3 > points1 && points3 > points4) {
         wins3 = wins3 + 1;
         storePlayerDetails(document.getElementById('player3-name').value, points3, wins3);
-        alert('Player 3 won with ' + points3);
+        alert('Player 3 won with ' + points3+ ' points');
         return wins3;
     } else if (points4 > points2 && points4 > points3 && points4 > points1) {
         wins4 = wins4 + 1;
         storePlayerDetails(document.getElementById('player4-name').value, points4, wins4);
-        alert('Player 4 won with ' + points4);
+        alert('Player 4 won with ' + points4 + ' points');
         return wins4;
     }
 }

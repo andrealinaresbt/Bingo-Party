@@ -20,6 +20,8 @@
                 <input class="text"  id="player1-name" placeholder="PLAYER 1 NAME">
                 <label class="form" label for="player2-name">Player two:</label>
                 <input class="text" id="player2-name" placeholder="PLAYER 2 NAME">
+                <br>
+                <br>
                 <label class="form" label for="player3-name">Player three:</label>
                 <input class="text" id="player3-name" placeholder="PLAYER 3 NAME">
                 <label class="form" label for="player4-name">Player four:</label>
@@ -34,7 +36,7 @@
             <div id="game-controls">
                 <div class="bingo-container"> 
                     <div id="winDisplay"></div>
-                    <button class="funct-btns" id="leaderboard" onclick="showLeaderBoard()">Leaderboard</button>
+                    <button class="lead-btns" id="leaderboard" onclick="showLeaderBoard()">Leaderboard</button>
                     
                     
                     <div id="leaderBox">
@@ -43,7 +45,7 @@
                         
 
                     </div>
-                    <text class="important-info" id="rounds">You can press the buttons of players to show all the options or remove the one you click on, you can also see them again by clicking on it again</text>
+                    <text class="important-info" id="rounds">You can press the buttons of players to show all the options or remove the one you click on, you can also see them again by clicking on it again. If you click on the leaderboard the leaderboard will display.</text>
                 <div class="player-cards"> 
                     
                     <div class="player-card" id="player1Card"> 
@@ -60,10 +62,10 @@
     
                 <div class="board-buttons">
                     <div id="See-player-controllers">
-                        <button class="funct-btns" id="Player1-card" onclick="showPlayer1()">Player 1 card</button>
-                        <button class="funct-btns" id="Player2-card" onclick="showPlayer2()">Player 2 card</button>
-                        <button class="funct-btns" id="Player-card" onclick="showPlayer3()">Player 3 card</button>
-                        <button class="funct-btns" id="Player4-card" onclick="showPlayer4()">Player 4 card</button>
+                        <button class="play-btns" id="Player1-card" onclick="showPlayer1()">Player 1 card</button>
+                        <button class="play-btns" id="Player2-card" onclick="showPlayer2()">Player 2 card</button>
+                        <button class="play-btns" id="Player-card" onclick="showPlayer3()">Player 3 card</button>
+                        <button class="play-btns" id="Player4-card" onclick="showPlayer4()">Player 4 card</button>
                     </div>
                     <div id="functional-controllers">
                         <text class="important-info" id="rounds">Round number: </text>

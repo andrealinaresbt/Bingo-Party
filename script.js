@@ -93,6 +93,8 @@ function displayPlayerDetails() {
     } else {
       container.innerHTML = 'No player details found.'+ localStorage.getItem('playerDetails');
     }
+    container.style.fontWeight = 'bold';
+    container.style.fontcolor = #fff;
   }
 function showLeaderBoard(){
    
@@ -256,29 +258,26 @@ function drawBall() {
 
       if (checkFullHouse(player1Card,points1)) { 
         wins1+=1;
-        storePlayerDetails(document.getElementById('player1-name').value, points1, wins1);
+        calculateWins();
         endGame();
         
     } else if (checkFullHouse(player2Card,points2)) { 
         wins2+=1;
         storePlayerDetails(document.getElementById('player2-name').value, points2, wins2);
-            document.getElementById('winDisplay').textContent = 'Player 2 has won the game!'; 
-            alert("Player 2 has won the game!"); 
+        calculateWins();
             endGame();
       
            
         }else if (checkFullHouse(player3Card,points3)) { 
         wins3+=1;
         storePlayerDetails(document.getElementById('player3-name').value, points3, wins3);
-            document.getElementById('winDisplay').textContent = 'Player 3 has won the game!';
-            alert("Player 3 has won the game!");  
+            calculateWins();
             endGame();
       
         }else if (checkFullHouse(player4Card,points4)) { 
             wins4+=1;
             storePlayerDetails(document.getElementById('player4-name').value, points4, wins4);
-            document.getElementById('winDisplay').textContent = 'Player 4 has won the game!'; 
-            alert("Player 4 has won the game!"); 
+            calculateWins();
             endGame();
 
            
